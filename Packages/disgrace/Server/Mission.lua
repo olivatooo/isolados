@@ -11,7 +11,7 @@ setmetatable(Mission, {
 
 function DefaultMissionStart(mission, args)
 	local player_level = args[1]
-	local s = Squad(mission.Location, 1750*player_level, math.random(2, 12) )
+	local s = Squad(mission.Location, math.ceil(math.random(1750, 3500)*player_level*1.1), math.random(2, 6) )
 	Events.Subscribe("SquadWipe", function()
 		mission:End()
 		Events.Call("MissionEnd", mission.ID)

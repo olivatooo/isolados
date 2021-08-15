@@ -6,44 +6,32 @@ OnGoing = false
 
 
 local spawn_locations = {
-	-- Vector(-65076.000, 4184.000, -106.923),
-	-- Vector(-65076.000, 2295.000, -106.923),
-	-- Vector(-65076.000, 239.000, -106.923),
-	-- Vector(-67469.000, 14820.000, 399.217),
-	-- Vector(-67469.000, 16752.000, 399.217),
-	-- Vector(-67469.000, 12835.000, 399.217),
-	-- Vector(-52230.000, 12190.000, 202.163),
-	-- Vector(-53790.000, 12479.000, 193.795),
-	-- Vector(-44975.000, 12411.000, -298.149),
-	-- Vector(-45069.000, 12956.000, -298.149),
-	-- Vector(-45163.000, 13672.000, -298.149),
-	-- Vector(-32219.000, 10587.000, 197.131),
-	-- Vector(-31788.000, 11671.000, 197.131),
-	-- Vector(-31309.000, 12776.000, 197.131),
-	-- Vector(-30774.000, 13907.000, 197.131),
-	-- Vector(-25101.000, 6002.000, 176.502),
-	-- Vector(-24110.000, 6577.000, 176.502),
-	-- Vector(-22842.000, -18222.000, -52.235),
-	-- Vector(-24534.000, -18334.000, -151.480),
-	-- Vector(-33860.000, -15033.000, -145.480),
-	-- Vector(-37388.000, -11335.000, 168.078),
-	-- Vector(-36571.000, -6030.000, -396.766),
-	-- Vector(-30177.000, -1527.000, -281.594),
-	-- Vector(-26788.000, 2497.000, 49.047),
-	-- Vector(-34133.000, 917.000, -436.952),
-	-- Vector(-56030.000, -15969.000, -30.660),
-	-- Vector(-54339.000, -15367.000, -181.141),
-	-- Vector(-57500.000, -11528.000, -32.134),
-	-- Vector(-66100.000, -5985.000, 643.852),
-	-- Vector(-41677.000, 12607.000, 217.587),
-	Vector(0,0,2000)
+	Vector(-2006, 8287, 200),
+	Vector(-4701, 7058, 236),
+	Vector(7065, 5516, 210),
+	Vector(4084, 8175, 238),
+	Vector(-4661, -688, 295),
+	Vector(9349, -776, 215),
+	Vector(6221, -7602, 197),
+	Vector(344, -4713, 517),
+	Vector(-2352, -6579, 313),
+	Vector(-7831, -7635, 197),
+	Vector(-9481, -2884, 185),
+	Vector(-8014, -754, 394),
+	Vector(-9400, 3869, 186),
+	Vector(-5850, 8164, 222),
+	Vector(-2050, 6654, 228),
+	Vector(-1207, 5057, 235),
+	Vector(3760, 10620, 119),
+	Vector(3143, 8325, 248),
+	Vector(6910, -1799, 267),
+	Vector(1569, -10662, 216),
 }
 
 
 
 local Selector = Prop(
-	-- Vector(-59018.000, 2541.000, -608.891),
-	Vector(0,0,100),
+	Vector(-4014, -4765, 714),
 	Rotator(0, 90, 90),
 	"nanos-world::SM_Cube"
 )
@@ -101,10 +89,9 @@ end)
 
 function CreateCharacter(player)
 	if player and player:IsValid() then
-		-- NanosWorldWeapons.Glock(Vector(-59018.000, 2641.000, -608.891))
-		NanosWorldWeapons.Glock(Vector(0, 0, 300))
-		-- local new_character = Character(Vector(-59018.000, 2641.000, -608.891), Rotator(0,0,0), "nanos-world::SK_Male")
-		local new_character = Character(Vector(100, 0, 100), Rotator(0,0,0), "nanos-world::SK_Male")
+		local w = NanosWorldWeapons.Glock(Vector(-4014, -4865, 714))
+		local new_character = Character(Vector(-4014, -4865, 714), Rotator(0,0,0), "nanos-world::SK_Male")
+		new_character:PickUp(w)
 		new_character:SetTeam(8)
 		new_character:SetHealth(100*PlayerLevel*1.5)
 		new_character:SetViewMode(ViewMode.FPS)

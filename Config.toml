@@ -39,7 +39,7 @@
 		"halloween-city-park",
 	]
 	# default startup map
-	map =				"nanos-world::BlankMap"
+	map =				"nanos-world::TestingMap"
 	# banned IPs
 	banned_ips = [
 		

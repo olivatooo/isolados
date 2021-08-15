@@ -1,4 +1,5 @@
 Package.Require("Utils.lua")
+Package.Require("BotBehavior.lua")
 
 
 CharacterBot = {}
@@ -64,20 +65,20 @@ function Bot:Color()
 end
 
 function Bot:AlertTeam(enemy)
-	local bot = self.Character
-	local scream = Trigger(bot:GetLocation(), Rotator(), self.ScreamRange, TriggerType.Sphere, false, Color(1, 0, 1))
-	scream:AttachTo(bot, AttachmentRule.SnapToTarget)
-	scream:Subscribe("BeginOverlap", function (_, friend)
-		if friend and 
-			friend:IsValid() and
-			friend:GetType() == "Character" and
-			friend:GetTeam() == bot:GetTeam() then
-				table.insert(CharacterBot[friend].Enemies, enemy)
-		end
-	end)
-	Timer.SetTimeout(function(sc)
-		sc:Destroy()
-	end, 5000, scream)
+	if self.Scream == false then
+		self.Scream = true
+		local bot = self.Character
+		local scream = Trigger(bot:GetLocation(), Rotator(), self.ScreamRange, TriggerType.Sphere, false, Color(1, 0, 1))
+		scream:AttachTo(bot, AttachmentRule.SnapToTarget)
+		scream:Subscribe("BeginOverlap", function (_, friend)
+			if friend and 
+				friend:IsValid() and
+				friend:GetType() == "Character" and
+				friend:GetTeam() == bot:GetTeam() then
+					table.insert(CharacterBot[friend].Enemies, enemy)
+			end
+		end)
+	end
 	-- 
 end
 
@@ -254,7 +255,7 @@ function DefaultCombatMovement(self)
 	if bot and bot:IsValid() then
 		if enemy and enemy:IsValid() and enemy:GetHealth()>0 and enemy:GetType() == "Character" then
 			local enemy_location = enemy:GetLocation()
-			bot:LookAt(enemy_location + Vector( math.random(-10,10), math.random(-10,10) ,math.random(-100,100)))
+			bot:LookAt(enemy_location + Vector( math.random(-20,20), math.random(-20,20) ,math.random(-20,20)))
 
 			if math.random(100) > 50 then
 				bot:SetStanceMode(math.random(0,3))
@@ -303,6 +304,7 @@ function Bot:IdleMovementBehavior()
 	self.Movement = bot_movement
 end
 
+BotCombatFunctions = {DefaultCombatMovement, BotCombatSniper, BotRunNGun ,BotCS16, BotMLG}
 
 function Bot.new(location, team, combat_behavior, defensive_behavior, idle_behavior, debug)
 	local self = setmetatable({}, Bot)
@@ -315,22 +317,23 @@ function Bot.new(location, team, combat_behavior, defensive_behavior, idle_behav
 	self.IdleTime = math.random(2500,5000)
 	self.InCombat = false
 
-	self.LongAwareSize = 7500
-	self.LongAwareChance = 10
+	self.LongAwareSize = 5000
+	self.LongAwareChance = 2
 
-	self.MediumAwareSize = 3750
+	self.MediumAwareSize = 1500
 	self.MediumAwareChance = 35
 
-	self.ShortAwareSize = 1000
+	self.ShortAwareSize = 500
 	self.ShortAwareChance = 95
 
 	self.WeaponAwareSize = 300
 	self.WeaponAwareChance = 100
 
-	self.FOVRadius = 3000
+	self.FOVRadius = 2000
 	self.FOVChance = 100
 
-	self.ScreamRange = 5000
+	self.ScreamRange = 1000
+	self.Scream = false
 	self.Debug = debug
 
 	self.Enemies = {}

@@ -55,7 +55,7 @@ function UpgradeDamageSettings(weapon, price)
 	local damage = weapon:GetDamage()
 	weapon:SetDamage(damage + math.ceil(price/1000))
 	if damage >= 50 then
-		weapon:SetScale(Vector(damage/50,damage/50,damage/50))
+		weapon:SetScale(Vector(1.2))
 	end
 end
 

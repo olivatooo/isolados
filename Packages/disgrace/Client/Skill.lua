@@ -1,6 +1,6 @@
-PlayerLevel = 40
+PlayerLevel = 1
 
-SkillCooldown = {{true, 5000}, {true, 30000}, {true, 60000}, {true, 50000}}
+SkillCooldown = {{true, 20000}, {true, 30000}, {true, 60000}, {true, 50000}}
 
 function SetPlayerLevel(level)
 	PlayerLevel = level
@@ -38,7 +38,7 @@ function UseSkill(skill)
 		Timer.SetTimeout(function() 
 			SkillCooldown[1][1] = true
 			Sound(Vector(), "nanos-world::A_VR_Click_01", true, true, SoundType.SFX, 1, 1)
-		end, SkillCooldown[1][2])
+		end, SkillCooldown[1][2]- (PlayerLevel*100) )
 		Events.CallRemote("UseSkill", 1)
 	end
 
@@ -47,7 +47,7 @@ function UseSkill(skill)
 		Timer.SetTimeout(function() 
 			SkillCooldown[2][1] = true 
 			Sound(Vector(), "nanos-world::A_VR_Click_02", true, true, SoundType.SFX, 1, 1)
-		end, SkillCooldown[2][2])
+		end, SkillCooldown[2][2]- (PlayerLevel*100))
 		Events.CallRemote("UseSkill", 2)
 	end
 
@@ -56,7 +56,7 @@ function UseSkill(skill)
 		Timer.SetTimeout(function() 
 			SkillCooldown[3][1] = true 
 			Sound(Vector(), "nanos-world::A_VR_Click_03", true, true, SoundType.SFX, 1, 1)
-		end, SkillCooldown[3][2])
+		end, SkillCooldown[3][2]- (PlayerLevel*100))
 		Events.CallRemote("UseSkill", 3)
 	end
 
@@ -65,7 +65,7 @@ function UseSkill(skill)
 		Timer.SetTimeout(function() 
 			SkillCooldown[4][1] = true 
 			Sound(Vector(), "nanos-world::A_VR_Click_03", true, true, SoundType.SFX, 1, 1)
-		end, SkillCooldown[4][2])
+		end, SkillCooldown[4][2]- (PlayerLevel*100))
 		Events.CallRemote("UseSkill", 4)
 	end
 end
